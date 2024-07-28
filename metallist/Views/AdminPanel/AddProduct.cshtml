@@ -1,0 +1,41 @@
+﻿@model Products
+@{
+    ViewData["Title"] = "Добавление товара";
+}
+<h2>Добавление продукта</h2>
+<form asp-action="CreateProduct" asp-controller="AdminPanel">
+    <p>
+        <label asp-for="Name">Название продукта</label><br />
+        <input type="text" asp-for="Name" />
+    </p>
+    <p>
+        <label asp-for="Desc">Описание</label><br />
+        <input type="text" asp-for="Desc" />
+    </p>
+    <p>
+        <label asp-for="Vendor">Артикул</label><br />
+        <input type="text" asp-for="Vendor" />
+    </p>
+    <p>
+        <label asp-for="Size">Размеры</label><br />
+        <input type="text" asp-for="Size" />
+    </p>
+    <p>
+        <label asp-for="Cost">Цена</label><br />
+        <input type="number" asp-for="Cost" />
+    </p>
+    <p>
+        <label asp-for="Img">Картинка</label><br />
+        <input type="file" asp-for="Img" />
+    </p>
+    <p>
+        <label asp-for="Category_id">Категория</label><br />
+        <input type="text" asp-for="Category_id" />
+    </p>
+    <p>
+        <input type="submit" value="Добавить" />
+    </p>
+</form>
+@section footer{
+
+}

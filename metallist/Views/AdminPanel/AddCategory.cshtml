@@ -1,0 +1,17 @@
+﻿@model Categories
+@{
+    ViewData["Title"] = "Добавление категории";
+}
+<h2>Добавление продукта</h2>
+<form asp-action="CreateCategory" asp-controller="AdminPanel">
+    <p>
+        <label asp-for="Name">Название категории</label><br />
+        <input type="text" asp-for="Name" />
+    </p>
+    <p>
+        <input type="submit" value="Добавить" />
+    </p>
+</form>
+@section footer {
+
+}

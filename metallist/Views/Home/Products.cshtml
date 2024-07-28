@@ -1,6 +1,42 @@
-﻿@{
-    ViewData["Title"] = "Главная";
+﻿@model IEnumerable<metallist.Models.Products>
+@{
+    ViewData["Title"] = "Продукты";
 }
 
 <h1>Продукты</h1>
-<p>Ваш надежный поставщик металлических изделий и услуг сварки.</p>
+@* <table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Vendor</td>
+        </tr>
+    }
+</table> *@
+<div class="container">
+    <div class="row">
+    @foreach(var item in Model)
+    {
+            <div class="m-4 card" style="width: 18rem;">
+                <img src="data:image;base64,@System.Convert.ToBase64String(item.Img)" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <p class="card-text">Описание: @item.Desc</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Цена: @item.Cost рублей</li>
+            <li class="list-group-item">Размер: @item.Size</li>
+            <li class="list-group-item">Артикул: @item.Vendor</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    }
+    </div>
+</div>
+@section footer
+{
+    
+}

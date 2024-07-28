@@ -26,28 +26,34 @@
                         <a class="nav-link" asp-controller="Home" asp-action="Products">Продукты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Services">Услуги</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Services">Услуги</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/About">О нас</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="About">О нас</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Contact">Контакты</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Contact">Контакты</a>
                     </li>
+                    @* <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="CreateProductPage">Добавить продукт</a>
+                    </li> *@
                 </ul>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+    @* <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
-    <footer class="footer mt-auto py-3 bg-light">
+    </div> *@
+    @RenderSection("footer")
+    @* <footer class="border-top footer bg-light">
         <div class="container">
             <span class="text-muted">© 2024 МЕТАЛЛИСТ. Все права защищены.</span>
         </div>
-    </footer>
-    @RenderSection("Scripts", required: false)
+    </footer> *@
 </body>
 </html>

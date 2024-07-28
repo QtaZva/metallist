@@ -1,3 +1,6 @@
+using metallist.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace metallist
 {
     public class Program
@@ -6,7 +9,11 @@ namespace metallist
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Добавление контекста базы данных
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Add services to the container. 
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
