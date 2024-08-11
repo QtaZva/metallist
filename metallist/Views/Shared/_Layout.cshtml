@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        @* <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/">МЕТАЛЛИСТ</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,10 +34,44 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Contact">Контакты</a>
                     </li>
-                    @* <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="CreateProductPage">Добавить продукт</a>
+                </ul>
+            </div>
+        </nav> *@
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="/">Магазин</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Products">Каталог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="About">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Contact">Контакты</a>
+                    </li>
+                    @* <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Личный кабинет
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Профиль</a>
+                            <a class="dropdown-item" href="#">Заказы</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Выход</a>
+                        </div>
                     </li> *@
                 </ul>
+                <div class="navbar-text contact-info">
+                    <p class="mb-0">Email: support@magazin.com</p>
+                    <p class="mb-0">Телефон: +1 234 567 890</p>
+                </div>
             </div>
         </nav>
     </header>
@@ -49,11 +83,17 @@
             @RenderBody()
         </main>
     </div> *@
-    @RenderSection("footer")
-    @* <footer class="border-top footer bg-light">
+    @* @RenderSection("footer") *@
+    <footer class="footer">
         <div class="container">
-            <span class="text-muted">© 2024 МЕТАЛЛИСТ. Все права защищены.</span>
+            <p>&copy; 2024 Магазин. Все права защищены.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="/">Главная</a></li>
+                <li class="list-inline-item"><a asp-controller="Home" asp-action="Products">Каталог</a></li>
+                <li class="list-inline-item"><a asp-controller="Home" asp-action="About">О нас</a></li>
+                <li class="list-inline-item"><a asp-controller="Home" asp-action="Contact">Контакты</a></li>
+            </ul>
         </div>
-    </footer> *@
+    </footer>
 </body>
 </html>
