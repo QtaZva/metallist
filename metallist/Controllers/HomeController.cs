@@ -22,7 +22,16 @@ namespace metallist.Controllers
         {
             return View(await db.Products.ToListAsync());
         }
-
+        // Метод для отображения деталей товара
+        public IActionResult Details(int id)
+        {
+            var product = db.Products.FirstOrDefault(p => p.id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
         public IActionResult Services()
         {
             return View();
@@ -37,16 +46,5 @@ namespace metallist.Controllers
         {
             return View();
         }
-        /*public IActionResult CreateProductPage()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateProduct(Products product)
-        {
-            db.Products.Add(product);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }*/
     }
 }

@@ -1,0 +1,32 @@
+﻿@model Products
+@{
+    ViewData["Title"] = Model.Name;
+}
+@* <div>
+    <p>Price: @Model.Cost</p>
+    <p>Description: @Model.Desc</p>
+</div> *@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Место под картинку -->
+            <img src="data:image;base64,@System.Convert.ToBase64String(Model.Img)" alt="Товар" class="img-fluid" height="500" width="500">
+        </div>
+        <div class="col-md-6">
+            <!-- Название товара -->
+            <h2>@Model.Name</h2>
+            <!-- Артикул -->
+            <p><strong>Артикул:</strong> @Model.Vendor</p>
+            <!-- Цена -->
+            <p><strong>Цена:</strong> @Model.Cost ₽</p>
+            <!-- Описание -->
+            <p>@Model.Desc</p>
+            <!-- Размер -->
+            <p><strong>Размер: </strong>@Model.Size</p>
+            <!-- Категория -->
+            <p><strong>Категория:</strong> @Model.Category_id</p>
+            <!-- Кнопка добавления в корзину -->
+            <button class="btn btn-primary mt-3">Добавить в корзину</button>
+        </div>
+    </div>
+</div>

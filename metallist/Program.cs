@@ -19,6 +19,7 @@ namespace metallist
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                     options.LoginPath = "/Account/Login";
                 });
 
