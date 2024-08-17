@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace metallist.Controllers
@@ -20,13 +21,44 @@ namespace metallist.Controllers
         }
         public IActionResult AddProduct()
         {
-            return View();
+            var categories = db.Categories
+            .Select(c => new SelectListItem
+            {
+                Value = c.id.ToString(),
+                Text = c.Name
+            })
+            .ToList();
+
+            var viewModel = new ProductViewModel
+            {
+                Categories = categories
+            };
+
+            return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(Products product)
+        public async Task<IActionResult> CreateProduct(ProductViewModel model)
         {
-            db.Products.Add(product);
-            await db.SaveChangesAsync();
+            var newProduct = new Products
+            {
+                Name = model.Name,
+                Desc = model.Desc,
+                Vendor = model.Vendor,
+                Size = model.Size,
+                Cost = model.Cost,
+                Category_id = model.Category_id
+            };
+
+            if (model.Img != null && model.Img.Length > 0)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    await model.Img.CopyToAsync(ms);
+                    newProduct.Img = ms.ToArray();
+                }
+            }
+            db.Products.Add(newProduct);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
         public IActionResult AddCategory()

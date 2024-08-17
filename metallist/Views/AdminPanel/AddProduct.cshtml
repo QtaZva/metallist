@@ -1,38 +1,87 @@
-﻿@model Products
+﻿@model ProductViewModel
 @{
     ViewData["Title"] = "Добавление товара";
 }
 <h2>Добавление продукта</h2>
-<form asp-action="CreateProduct" asp-controller="AdminPanel">
-    <p>
-        <label asp-for="Name">Название продукта</label><br />
-        <input type="text" asp-for="Name" />
-    </p>
-    <p>
-        <label asp-for="Desc">Описание</label><br />
-        <input type="text" asp-for="Desc" />
-    </p>
-    <p>
-        <label asp-for="Vendor">Артикул</label><br />
-        <input type="text" asp-for="Vendor" />
-    </p>
-    <p>
-        <label asp-for="Size">Размеры</label><br />
-        <input type="text" asp-for="Size" />
-    </p>
-    <p>
-        <label asp-for="Cost">Цена</label><br />
-        <input type="number" asp-for="Cost" />
-    </p>
-    <p>
-        <label asp-for="Img">Картинка</label><br />
-        <input type="file" asp-for="Img" />
-    </p>
-    <p>
-        <label asp-for="Category_id">Категория</label><br />
-        <input type="text" asp-for="Category_id" />
-    </p>
-    <p>
+@* <form asp-action="CreateProduct" enctype="multipart/form-data">
+    <div>
+        <label>Название продукта:</label>
+        <input type="text" name="Name" />
+    </div>
+    <div>
+        <label>Описание:</label>
+        <input type="text" name="Desc" />
+    </div>
+    <div>
+        <label>Артикул:</label>
+        <input type="text" name="Vendor" />
+    </div>
+    <div>
+        <label>Размер:</label>
+        <input type="text" name="Size" />
+    </div>
+    <div>
+        <label>Цена:</label>
+        <input type="number" name="Cost" />
+    </div>
+    <div>
+        <label>Картинка:</label>
+        <input type="file" name="Img" />
+    </div>
+    <div>
+        <label>Категория:</label>
+        <input type="number" name="Category_id" />
+    </div>
+    <div>
         <input type="submit" value="Добавить" />
-    </p>
+    </div>
+</form> *@
+
+<form asp-action="CreateProduct" enctype="multipart/form-data">
+    <div class="form-group">
+        <label class="control-label">Название</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Описание</label>
+        <input asp-for="Desc" class="form-control" />
+        <span asp-validation-for="Desc" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Артикул</label>
+        <input asp-for="Vendor" class="form-control" />
+        <span asp-validation-for="Vendor" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Размер</label>
+        <input asp-for="Size" class="form-control" />
+        <span asp-validation-for="Size" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Цена</label>
+        <input asp-for="Cost" type="number" class="form-control" />
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Картинка</label>
+        <input asp-for="Img" type="file" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Категория</label>
+        <select asp-for="Category_id" class="form-control" asp-items="Model.Categories">
+            <option value="">-- Select Category --</option>
+        </select>
+        <span asp-validation-for="Category_id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </div>
 </form>
