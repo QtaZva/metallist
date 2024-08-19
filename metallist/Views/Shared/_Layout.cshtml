@@ -11,84 +11,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <header>
-        @* <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">МЕТАЛЛИСТ</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Products">Продукты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Services">Услуги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="About">О нас</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Contact">Контакты</a>
-                    </li>
-                </ul>
-            </div>
-        </nav> *@
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="/">Магазин</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Products">Каталог</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="About">О нас</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Contact">Контакты</a>
-                    </li>
-                    @* <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Личный кабинет
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Профиль</a>
-                            <a class="dropdown-item" href="#">Заказы</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Выход</a>
-                        </div>
-                    </li> *@
-                </ul>
-                <div class="navbar-text contact-info">
-                    <p class="mb-0">Email: support@magazin.com</p>
-                    <p class="mb-0">Телефон: +1 234 567 890</p>
-                </div>
-            </div>
-        </nav>
+    <header class="py-2 border-bottom bg-white">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                <img src="@Url.Action("GetIcon", "Home", new { id = 1 })" class="card-img-top" alt="...">
+            </a>
+            <form class="col-12 col-lg-auto mb-2 mb-lg-0" role="search">
+                <input type="search" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+            </form>
+        </div>
     </header>
+    <nav class="py-0 bg-white border-bottom">
+        <div class="container d-flex flex-wrap">
+            <ul class="nav me-auto">
+                <li class="nav-item"><a asp-action="Products" asp-controller="Home" class="nav-link text-dark px-2">Продукты</a></li>
+                <li class="nav-item"><a asp-action="About" asp-controller="Home" class="nav-link text-dark px-2">О нас</a></li>
+                <li class="nav-item"><a asp-action="Contact" asp-controller="Home" class="nav-link text-dark px-2">Контакты</a></li>
+                <li class="nav-item"><a asp-action="Services" asp-controller="Home" class="nav-link text-dark px-2">Услуги</a></li>
+            </ul>
+        </div>
+    </nav>
     <main role="main" class="container">
         @RenderBody()
     </main>
-    @* <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div> *@
-    @* @RenderSection("footer") *@
-    <footer class="footer">
+    <footer class="footer bg-white">
         <div class="container">
-            <p>&copy; 2024 Магазин. Все права защищены.</p>
+            <p class="text-dark">&copy; 2024 ООО"МЕТАЛЛИСТ". Все права защищены.</p>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="/">Главная</a></li>
                 <li class="list-inline-item"><a asp-controller="Home" asp-action="Products">Каталог</a></li>
                 <li class="list-inline-item"><a asp-controller="Home" asp-action="About">О нас</a></li>
                 <li class="list-inline-item"><a asp-controller="Home" asp-action="Contact">Контакты</a></li>

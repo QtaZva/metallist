@@ -10,6 +10,8 @@ namespace metallist.Models
         public DbSet<Products> Products { get; set; }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Admins> Admins { get; set; }
+        public DbSet<MediaFiles> MediaFiles { get; set; }
+        public DbSet<Info> Info { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options) { }
         
     }

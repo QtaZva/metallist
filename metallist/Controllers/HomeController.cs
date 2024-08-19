@@ -46,5 +46,24 @@ namespace metallist.Controllers
         {
             return View();
         }
+        public IActionResult GetIcon(int id)
+        {
+            var mediaFile = db.MediaFiles.SingleOrDefault(m => m.id == id);
+            if (mediaFile == null || mediaFile.File == null)
+            {
+                return NotFound();
+            }
+
+            return File(mediaFile.File, "image/png");
+        }
+        public IActionResult GetInfo(int id)
+        {
+            var info = db.Info.SingleOrDefault(p => p.id == id);
+            if (info == null)
+            {
+                return NotFound();
+            }
+            return Content(info.Information, "text/plain");
+        }
     }
 }
