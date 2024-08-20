@@ -3,3 +3,16 @@
 }
 
 <h1>Контакты</h1>
+<div id="info-container">Loading...</div>
+
+<script>
+    // Запрос данных и вставка в div
+    fetch("@Url.Action("GetInfo", "Home", new { id = 2 })")
+        .then(response => response.text())
+        .then(text => {
+            document.getElementById('info-container').innerHTML = text;
+        })
+        .catch(error => {
+            document.getElementById('info-container').innerText = "Error loading information.";
+        });
+</script>
