@@ -65,5 +65,19 @@ namespace metallist.Controllers
             }
             return Content(info.Information, "text/plain");
         }
+        [HttpGet]
+        public async Task<IActionResult> Search(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                return View("SearchResults", new List<Products>());
+            }
+
+            var results = await db.Products
+                .Where(p => p.Name.Contains(query) || p.Vendor.Contains(query))
+                .ToListAsync();
+
+            return View("SearchResults", results);
+        }
     }
 }

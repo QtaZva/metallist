@@ -26,16 +26,14 @@
             </div>
         </div>
         <div class="container mt-2">
-            <form class="w-100 position-relative" role="search">
-                <input type="search" class="form-control form-control-lg rounded-pill shadow-sm pe-5" placeholder="Искать..." aria-label="Search">
+            <form class="w-100 position-relative" role="search" action="@Url.Action("Search", "Home")">
+                <input type="search" name="query" class="form-control form-control-lg rounded-pill shadow-sm pe-5" placeholder="Искать..." aria-label="Search">
                 <button type="submit" class="btn position-absolute top-50 end-0 translate-middle-y me-2">
                     <i class="bi bi-search"></i>
                 </button>
             </form>
         </div>
     </header>
-
-
     <main role="main" class="container">
         @RenderBody()
     </main>

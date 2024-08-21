@@ -66,4 +66,11 @@ namespace metallist.Models
         public int Category_id { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
     }
+    public class EditProductViewModel
+    {
+        public Products Product { get; set; }
+        public IFormFile Img { get; set; }
+        public IEnumerable<SelectListItem> Categories { get; set; }
+    }
+
 }

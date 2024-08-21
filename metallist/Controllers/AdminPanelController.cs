@@ -72,5 +72,77 @@ namespace metallist.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> ViewProducts()
+        {
+            var products = await db.Products.ToListAsync();
+            return View(products);
+        }
+        // Метод для отображения страницы редактирования товара
+        public async Task<IActionResult> EditProduct(int id)
+        {
+            var product = await db.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var categories = await db.Categories
+                .Select(c => new SelectListItem
+                {
+                    Value = c.id.ToString(),
+                    Text = c.Name
+                })
+                .ToListAsync();
+
+            var viewModel = new EditProductViewModel
+            {
+                Product = product,
+                Categories = categories
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(EditProductViewModel viewModel)
+        {
+            var product = await db.Products.FindAsync(viewModel.Product.id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            product.Name = viewModel.Product.Name;
+            product.Desc = viewModel.Product.Desc;
+            product.Vendor = viewModel.Product.Vendor;
+            product.Size = viewModel.Product.Size;
+            product.Cost = viewModel.Product.Cost;
+            product.Category_id = viewModel.Product.Category_id;
+
+            if (viewModel.Img != null)
+            {
+                // Обработка загрузки файла, если он был предоставлен
+                using var memoryStream = new MemoryStream();
+                await viewModel.Img.CopyToAsync(memoryStream);
+                product.Img = memoryStream.ToArray();
+            }
+
+            db.Products.Update(product);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var product = await db.Products.FindAsync(id);
+            if (product != null)
+            {
+                db.Products.Remove(product);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(ViewProducts));
+        }
+
+
     }
 }
