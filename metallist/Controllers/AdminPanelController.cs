@@ -61,17 +61,6 @@ namespace metallist.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public IActionResult AddCategory()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateCategory(Categories category)
-        {
-            db.Categories.Add(category);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
         public async Task<IActionResult> ViewProducts()
         {
             var products = await db.Products.ToListAsync();
@@ -142,7 +131,49 @@ namespace metallist.Controllers
             }
             return RedirectToAction(nameof(ViewProducts));
         }
-
-
+        public IActionResult AddCategory()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(Categories category)
+        {
+            db.Categories.Add(category);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> ViewCategories()
+        {
+            var categories = await db.Categories.ToListAsync();
+            return View(categories);
+        }
+        public async Task<IActionResult> EditCategory(int id)
+        {
+            var category = await db.Categories.FindAsync(id);
+            return View(category);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditCategory(Categories categoryModel)
+        {
+            var category = await db.Categories.FindAsync(categoryModel.id);
+            if(category == null)
+            {
+                return NotFound();
+            }
+            category.Name = categoryModel.Name;
+            db.Categories.Update(category);
+            db.SaveChanges();
+            return RedirectToAction(nameof(ViewCategories));
+        }
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = await db.Categories.FindAsync(id);
+            if(category != null)
+            {
+                db.Categories.Remove(category);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(ViewCategories));
+        }
     }
 }
