@@ -175,5 +175,20 @@ namespace metallist.Controllers
             }
             return RedirectToAction(nameof(ViewCategories));
         }
+        public async Task<IActionResult> ViewMediaFiles()
+        {
+            var mediaFiles = await db.MediaFiles.ToListAsync();
+            return View(mediaFiles);
+        }
+        public async Task<IActionResult> DeleteMediaFile(int id)
+        {
+            var media = await db.MediaFiles.FindAsync(id);
+            if (media != null)
+            {
+                db.MediaFiles.Remove(media);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(ViewMediaFiles));
+        }
     }
 }

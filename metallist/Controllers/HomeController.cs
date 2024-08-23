@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using X.PagedList.Extensions;
 
 namespace metallist.Controllers
 {
@@ -18,9 +19,14 @@ namespace metallist.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ProductsAsync()
+        public async Task<IActionResult> ProductsAsync(int? page)
         {
-            return View(await db.Products.ToListAsync());
+            int pageSize = 8; // количество товаров на одной странице
+            int pageNumber = (page ?? 1); // если страница не указана, открываем первую
+
+            var products = db.Products.OrderBy(p => p.Name).ToPagedList(pageNumber, pageSize);
+
+            return View(products);
         }
         // Метод для отображения деталей товара
         public IActionResult Details(int id)
