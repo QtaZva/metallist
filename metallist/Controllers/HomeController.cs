@@ -43,9 +43,10 @@ namespace metallist.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> About()
         {
-            return View();
+            var MediaFiles = await db.MediaFiles.ToListAsync();
+            return View(MediaFiles);
         }
 
         public IActionResult Contact()
