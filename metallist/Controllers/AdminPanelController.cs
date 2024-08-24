@@ -190,5 +190,85 @@ namespace metallist.Controllers
             }
             return RedirectToAction(nameof(ViewMediaFiles));
         }
+        public IActionResult AddMediaFile()
+        {
+            var pages = db.Info
+            .Select(c => new SelectListItem
+            {
+                Value = c.id.ToString(),
+                Text = c.Page
+            })
+            .ToList();
+
+            var viewModel = new MediaFileViewModel
+            {
+                Pages = pages
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateMediaFile(MediaFileViewModel model)
+        {
+            var newMediaFile = new MediaFiles
+            {
+                Name = model.Name,
+                Page_id = model.page_id
+            };
+            if (model.File != null)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    await model.File.CopyToAsync(ms);
+                    newMediaFile.File = ms.ToArray();
+                }
+            }
+            db.MediaFiles.Add(newMediaFile);
+            db.SaveChanges();
+            return RedirectToAction(nameof(ViewMediaFiles));
+        }
+        public async Task<IActionResult> EditMediaFile(int id)
+        {
+            var mediaFile = await db.MediaFiles.FindAsync(id);
+            if (mediaFile == null)
+            {
+                return NotFound();
+            }
+            var pages = db.Info
+                .Select(c => new SelectListItem
+                {
+                    Value = c.id.ToString(),
+                    Text = c.Page
+                })
+                .ToList();
+            var viewModel = new EditMediaFileViewModel
+            {
+                MediaFile = mediaFile,
+                Pages = pages
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditMediaFile(EditMediaFileViewModel model)
+        {
+            var MediaFile = await db.MediaFiles.FindAsync(model.MediaFile.id);
+            if (MediaFile == null)
+            {
+                return NotFound();
+            }
+            MediaFile.Name = model.MediaFile.Name;
+            MediaFile.Page_id = model.MediaFile.Page_id;
+            if (model.File != null)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    await model.File.CopyToAsync(ms);
+                    MediaFile.File = ms.ToArray();
+                }
+            }
+            db.MediaFiles.Update(MediaFile);
+            db.SaveChanges();
+            return RedirectToAction(nameof(ViewMediaFiles));
+        }
     }
 }
