@@ -1,13 +1,29 @@
-﻿@{
+﻿@model IEnumerable<MediaFiles>
+@{
     ViewData["Title"] = "Услуги";
 }
 
 <h1>Услуги</h1>
 <div id="info-container">Loading...</div>
-
+<div class="container">
+    <div class="row">
+        @if(Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                if (item.page_id == 2 && item.File != null)
+                {
+                    <div class="col-6 col-md-4 col-lg-3 mb-4">
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item.File)" class="img-fluid" alt="Изображение">
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
 <script>
     // Запрос данных и вставка в div
-    fetch("@Url.Action("GetInfo", "Home", new { id = 3 })")
+    fetch("@Url.Action("GetInfo", "Home", new { id = 2 })")
         .then(response => response.text())
         .then(text => {
             document.getElementById('info-container').innerHTML = text;

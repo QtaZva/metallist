@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace metallist.Controllers
 {
@@ -269,6 +270,33 @@ namespace metallist.Controllers
             db.MediaFiles.Update(MediaFile);
             db.SaveChanges();
             return RedirectToAction(nameof(ViewMediaFiles));
+        }
+        public async Task<IActionResult> ViewInformation()
+        {
+            var info = await db.Info.ToListAsync();
+            return View(info);
+        }
+        public async Task<IActionResult> EditInformation(int id)
+        {
+            var info = await db.Info.FindAsync(id);
+            if (info == null)
+            {
+                return NotFound();
+            }
+            return View(info);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditInformation(Info info)
+        {
+            var editedInfo = await db.Info.FindAsync(info.id);
+            if (editedInfo == null)
+            {
+                return NotFound();
+            }
+            editedInfo.Information = info.Information;
+            db.Info.Update(editedInfo);
+            db.SaveChanges();
+            return RedirectToAction(nameof(ViewInformation));
         }
     }
 }

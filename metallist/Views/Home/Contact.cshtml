@@ -2,17 +2,52 @@
     ViewData["Title"] = "Контакты";
 }
 
-<h1>Контакты</h1>
-<div id="info-container">Loading...</div>
-
-<script>
-    // Запрос данных и вставка в div
-    fetch("@Url.Action("GetInfo", "Home", new { id = 2 })")
-        .then(response => response.text())
-        .then(text => {
-            document.getElementById('info-container').innerHTML = text;
-        })
-        .catch(error => {
-            document.getElementById('info-container').innerText = "Error loading information.";
-        });
-</script>
+<h1 class="text-center my-4">Контакты</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="d-flex align-items-start">
+                <img src="https://metallist-chita.ru/wp-content/themes/metallist-a6fce8_1713232249/images/65faaa40ec3896dc43e4e829_Frame2018.svg" alt="Address" class="me-4">
+                <div>
+                    <h6 class="fw-bold">Адрес:</h6>
+                    <p class="mb-1">Забайкальский край,</p>
+                    <p class="mb-0">г. Чита, ул. Недорезова, 3в</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="d-flex align-items-start">
+                <img src="https://metallist-chita.ru/wp-content/themes/metallist-a6fce8_1713232249/images/65faaa40ec43d4380f3b230d_lucide_mail.svg" alt="E-mail" class="me-4">
+                <div>
+                    <h6 class="fw-bold">E-mail:</h6>
+                    <p class="text-decoration-none">oao_metallist@mail.ru</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="d-flex align-items-start">
+                <img src="https://metallist-chita.ru/wp-content/themes/metallist-a6fce8_1713232249/images/65faaa407bffbb403ee9367c_lucide_phone.svg" alt="Phone" class="me-4">
+                <div>
+                    <h6 class="fw-bold">Телефон:</h6>
+                    <p class="text-decoration-none d-block mb-1">8 (3022) 99-84-20</p>
+                    <p class="text-decoration-none">8 (914) 470-36-38</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="d-flex align-items-start">
+                <img src="https://metallist-chita.ru/wp-content/themes/metallist-a6fce8_1713232249/images/65faaa41c1db07a671483426_tabler_clock-hour-5.svg" alt="Hours" class="me-4">
+                <div>
+                    <h6 class="fw-bold">Режим работы:</h6>
+                    <p class="mb-1">пн-пт с 08:30–17:00</p>
+                    <p class="mb-0">сб-вс выходной</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A0fffdc4bc61a43f515f97754efc4d3a90ce34e35b40b49d4d58569c9a700d5a8&amp;source=constructor" width="840" height="500" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>

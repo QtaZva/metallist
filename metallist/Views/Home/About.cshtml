@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MediaFiles>;
+﻿@model IEnumerable<MediaFiles>
 @{
     ViewData["Title"] = "О нас";
 }
@@ -7,11 +7,16 @@
 <div id="info-container">Loading...</div>
 <div class="container">
     <div class="row">
-        @foreach (var item in Model)
+        @if(Model != null)
         {
-            if(item.page_id == 1 && item.File != null)
+            @foreach (var item in Model)
             {
-                <img src="data:image;base64,@System.Convert.ToBase64String(item.File)" class="card-img-top" alt="Изображение">
+                if (item.page_id == 1 && item.File != null)
+                {
+                    <div class="col-6 col-md-4 col-lg-3 mb-4">
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item.File)" class="img-fluid" alt="Изображение">
+                    </div>
+                }
             }
         }
     </div>
