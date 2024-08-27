@@ -9,7 +9,10 @@
             get { return name; }
             set { name = value; }
         }
-        public Categories() { }
+        public Categories() 
+        { 
+
+        }
         public Categories(string name)
         {
             this.name = name;

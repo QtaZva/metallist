@@ -18,7 +18,23 @@ namespace metallist.Controllers
         {
             return View();
         }
+        // Вывод списка категорий
+        public async Task<IActionResult> Categories()
+        {
+            var categories = await db.Categories.ToListAsync();
+            return View(categories);
+        }
+        public async Task<IActionResult> ProductsByCategory(int categoryId, int? page)
+        {
+            int pageSize = 8; // количество товаров на одной странице
+            int pageNumber = page ?? 1;
 
+            var products = db.Products.Where(p => p.Category_id == categoryId).OrderBy(p => p.Name).ToPagedList(pageNumber, pageSize);
+
+            ViewBag.CategoryName = (await db.Categories.FindAsync(categoryId))?.Name;
+
+            return View(products);
+        }
         public async Task<IActionResult> ProductsAsync(int? page)
         {
             int pageSize = 8; // количество товаров на одной странице

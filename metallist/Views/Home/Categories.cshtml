@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Categories> 
+
+@{
+    ViewData["Title"] = "Категории";
+}
+
+<h1>Категории</h1>
+<div class="list-group">
+    @foreach (var category in Model)
+    {
+        <a href="@Url.Action("ProductsByCategory", "Home", new { categoryId = category.id })" class="list-group-item list-group-item-action">
+            @category.Name
+        </a>
+    }
+</div>
